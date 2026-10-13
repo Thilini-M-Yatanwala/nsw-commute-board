@@ -1,0 +1,71 @@
+### Health check with REST Client
+GET http://localhost:4000/api/health
+
+### Search stations
+GET http://localhost:4000/api/stations?search=par
+
+### One station
+GET http://localhost:4000/api/stations/parramatta
+
+### Station not found (expect 404)
+GET http://localhost:4000/api/stations/hogwarts
+
+### Departures (soonest first)
+GET http://localhost:4000/api/stations/parramatta/departures
+
+### Alerts (severe first)
+GET http://localhost:4000/api/alerts
+
+### Reports for Parramatta (newest first)
+GET http://localhost:4000/api/reports?stationId=parramatta
+
+### Unknown API route (expect 404 JSON)
+GET http://localhost:4000/api/trains
+### Create a valid report (expect 201)
+POST http://localhost:4000/api/reports
+Content-Type: application/json
+
+{
+  "stationId": "parramatta",
+  "category": "lift",
+  "description": "  Lift on platform 2 not working since this morning  "
+}
+
+### Invalid report: 3 problems (expect 400)
+POST http://localhost:4000/api/reports
+Content-Type: application/json
+
+{
+  "stationId": "hogwarts",
+  "category": "aliens",
+  "description": "Broken"
+}
+
+### Sneaky report: tries to set its own status and id (expect 201, extras ignored)
+POST http://localhost:4000/api/reports
+Content-Type: application/json
+
+{
+  "stationId": "central",
+  "category": "safety",
+  "description": "Broken glass near the ticket gates",
+  "status": "resolved",
+  "id": 1
+}
+
+### Empty body (expect 400)
+POST http://localhost:4000/api/reports
+Content-Type: application/json
+
+{}
+
+/*
+Format rules for POST in REST Client
+//POST http://...                      ← line 1: method + URL
+//Content-Type: application/json       ← line 2: header (tells Express "this is JSON")
+                                     ← line 3: MUST be EMPTY
+//{ ... }                              ← then the body
+
+// Without the blank line, REST Client treats the body as more headers and the request breaks.
+Without Content-Type: application/json, express.json() ignores the body, req.body stays empty, and you get a 400.
+*/
