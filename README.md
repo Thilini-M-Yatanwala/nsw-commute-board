@@ -23,8 +23,8 @@ NSW Commute Board answers these on one simple screen.
 | Feature | Description | Status |
 |---|---|---|
 | 🔍 Station search | Find a station by typing part of its name (case-insensitive) | ✅ Done |
-| 🕒 Departures | Next trains with line, destination, platform and minutes away | API ✅ · UI in progress |
-| ⚠️ Service alerts | Sorted by severity: severe → warning → info | API ✅ · UI in progress |
+| 🕒 Departures | Next trains with line, destination, platform and minutes away | ✅ Done |
+| ⚠️ Service alerts | Colour-coded by severity, filtered to each station's lines | Station page ✅ · Alerts page in progress |
 | 🛠️ Report an issue | Report problems like broken lifts, with server-side validation | API ✅ · UI in progress |
 | ⭐ Favourites | Save stations for quick access (stored in the browser) | Planned |
 
@@ -69,6 +69,7 @@ Vite dev server ── proxies /api ──▶ Express API (port 4000)
 | `components/` | Reusable UI pieces (layout, nav bar) |
 | `services/` | API calls with axios. Components never call URLs directly |
 | `models/` | TypeScript types matching the API's JSON |
+| `utils/` | Small pure functions (e.g. filtering alerts by line), easy to unit test |
 
 ### Design decisions
 
@@ -90,7 +91,8 @@ nsw-commute-board/
 │       ├── components/
 │       ├── models/
 │       ├── pages/
-│       └── services/
+│       ├── services/
+│       └── utils/
 ├── server/                    Express API
 │   ├── src/
 │   │   ├── data/              sample data (seed)
@@ -226,7 +228,8 @@ Validation rules: `stationId` must exist, `category` must be one of `lift`, `cle
 - [x] Report validation middleware with input sanitising
 - [x] Station search page connected to the API
 - [x] Loading and error states
-- [ ] Station page (departures + alerts) and Alerts page
+- [x] Station page with departures and alerts for its lines
+- [ ] Alerts page
 - [ ] Report an issue form
 - [ ] Favourites
 - [ ] Request logger and rate limiter middleware
