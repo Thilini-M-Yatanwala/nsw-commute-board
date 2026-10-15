@@ -4,7 +4,7 @@ function AlertsPage() {
       <h2 className="text-lg font-semibold text-slate-800">Service alerts</h2>
       <p className="mt-1 text-slate-600">Alerts will go here.</p>
     </div>
-  )
+  );
 }
 
-export default AlertsPage
+export default AlertsPage;

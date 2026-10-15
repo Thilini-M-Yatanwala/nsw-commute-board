@@ -1,7 +1,7 @@
-import { NavLink, Outlet } from 'react-router'
+import { NavLink, Outlet } from 'react-router';
 
 function navClass({ isActive }: { isActive: boolean }): string {
-  return isActive ? 'font-semibold underline' : 'opacity-80 hover:opacity-100'
+  return isActive ? 'font-semibold underline' : 'opacity-80 hover:opacity-100';
 }
 
 function Layout() {
@@ -13,8 +13,12 @@ function Layout() {
             🚆 NSW Commute Board
           </NavLink>
           <nav className="flex gap-4 text-sm">
-            <NavLink to="/" end className={navClass}>Home</NavLink>
-            <NavLink to="/alerts" className={navClass}>Alerts</NavLink>
+            <NavLink to="/" end className={navClass}>
+              Home
+            </NavLink>
+            <NavLink to="/alerts" className={navClass}>
+              Alerts
+            </NavLink>
           </nav>
         </div>
       </header>
@@ -23,7 +27,7 @@ function Layout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

@@ -35,7 +35,7 @@ NSW Commute Board answers these on one simple screen.
 | Frontend | React 19, TypeScript, Vite, React Router, Tailwind CSS, axios |
 | Backend | Node.js, Express 5, TypeScript |
 | Testing | Vitest, React Testing Library, Supertest, Playwright *(in progress)* |
-| Code quality | ESLint, Prettier, TypeScript strict mode |
+| Code quality | ESLint, Prettier (`npm run format`), TypeScript strict mode |
 | Database | In-memory sample data now, PostgreSQL *(planned)* |
 
 ---
@@ -225,7 +225,7 @@ Validation rules: `stationId` must exist, `category` must be one of `lift`, `cle
 - [x] Express API with layered architecture
 - [x] Report validation middleware with input sanitising
 - [x] Station search page connected to the API
-- [ ] Loading and error states
+- [x] Loading and error states
 - [ ] Station page (departures + alerts) and Alerts page
 - [ ] Report an issue form
 - [ ] Favourites

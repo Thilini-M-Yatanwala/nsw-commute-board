@@ -1,16 +1,16 @@
-import { stations } from '../data/seed'
-import type { Station } from '../models/station.model'
+import { stations } from '../data/seed';
+import type { Station } from '../models/station.model';
 
 export const stationRepository = {
   async findAll(search: string): Promise<Station[]> {
-    const term = search.trim().toLowerCase()
-    return stations.filter((s) => s.name.toLowerCase().includes(term))
+    const term = search.trim().toLowerCase();
+    return stations.filter((s) => s.name.toLowerCase().includes(term));
   },
 
   async findById(id: string): Promise<Station | undefined> {
-    return stations.find((s) => s.id === id)
+    return stations.find((s) => s.id === id);
   },
-}
+};
 
 // The same repository with PostgreSQL
 
