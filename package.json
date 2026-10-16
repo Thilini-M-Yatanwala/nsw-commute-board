@@ -1,0 +1,25 @@
+{
+  "name": "nsw-commute-board",
+  "version": "1.0.0",
+  "description": "A commuter web app for Sydney trains: search stations, see upcoming departures, check service alerts and report station issues.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thilini-M-Yatanwala/nsw-commute-board.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Thilini-M-Yatanwala/nsw-commute-board/issues"
+  },
+  "homepage": "https://github.com/Thilini-M-Yatanwala/nsw-commute-board#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

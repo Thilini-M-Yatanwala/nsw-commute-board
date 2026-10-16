@@ -34,7 +34,7 @@ NSW Commute Board answers these on one simple screen.
 |---|---|
 | Frontend | React 19, TypeScript, Vite, React Router, Tailwind CSS, axios |
 | Backend | Node.js, Express 5, TypeScript |
-| Testing | Vitest (unit tests ✅) · React Testing Library, Supertest, Playwright *(planned)* |
+| Testing | Vitest (unit tests ✅) · Playwright (end-to-end tests ✅) · React Testing Library, Supertest *(planned)* |
 | Code quality | ESLint, Prettier (`npm run format`), TypeScript strict mode |
 | Database | In-memory sample data now, PostgreSQL *(planned)* |
 
@@ -107,6 +107,8 @@ nsw-commute-board/
 │   ├── tests/                 unit tests (Vitest)
 │   ├── requests.http          API examples (VS Code REST Client)
 │   └── .env.example
+├── e2e/                       end-to-end tests (Playwright)
+├── playwright.config.ts       starts both servers for e2e tests
 └── README.md
 ```
 
@@ -171,6 +173,22 @@ cd server && npm test
 ```
 
 The report validation rules are covered by unit tests: valid input, length boundaries, whitespace-only descriptions, unknown categories and stations, multiple errors at once, and a missing request body.
+
+**End-to-end tests** (Playwright) run in a real browser. From the project root:
+
+```bash
+npm install
+```
+
+```bash
+npx playwright install chromium
+```
+
+```bash
+npm run test:e2e
+```
+
+Playwright starts both servers automatically (or reuses them if already running). The tests cover the full commuter journey (search → station → report an issue → see it listed) and check that server validation errors appear under each form field. Add `--headed` to watch the browser.
 
 ---
 
@@ -244,7 +262,8 @@ Validation rules: `stationId` must exist, `category` must be one of `lift`, `cle
 - [ ] Favourites
 - [ ] Request logger and rate limiter middleware
 - [x] Unit tests for report validation (Vitest)
-- [ ] Component, API and end-to-end tests
+- [x] End-to-end tests with Playwright (search → station → report an issue)
+- [ ] Component and API tests
 - [ ] PostgreSQL database
 - [ ] GitHub Actions CI
 - [ ] Single `npm run dev` command for both apps
