@@ -8,13 +8,16 @@ import type { Station } from '../models/station.model';
 import type { Departure } from '../models/departure.model';
 import type { Alert } from '../models/alert.model';
 import AlertCard from '../components/AlertCard';
-
+import { getReports } from '../services/report.service';
+import ReportList from '../components/ReportList';
+import type { Report } from '../models/report.model';
 
 function StationPage() {
   const { id } = useParams<{ id: string }>();
   const [station, setStation] = useState<Station | null>(null);
   const [departures, setDepartures] = useState<Departure[]>([]);
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,14 +26,16 @@ function StationPage() {
 
     async function load(stationId: string) {
       try {
-        const [stationData, departureData, alertData] = await Promise.all([
+        const [stationData, departureData, alertData, reportData] = await Promise.all([
           getStation(stationId),
           getDepartures(stationId),
           getAlerts(),
+          getReports(stationId),
         ]);
         setStation(stationData);
         setDepartures(departureData);
         setAlerts(alertsForLines(alertData, stationData.lines));
+        setReports(reportData);
       } catch (err) {
         if (isAxiosError(err) && err.response?.status === 404) {
           setError('Station not found.');
@@ -64,16 +69,24 @@ function StationPage() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-800">{station.name}</h2>
-        <p className="mt-1 text-slate-500">Lines {station.lines.join(' · ')}</p>
+      <div className="flex items-start justify-between rounded-xl bg-white p-6 shadow-sm">
+        <div>
+          <h2 className="text-2xl font-semibold text-slate-800">{station.name}</h2>
+          <p className="mt-1 text-slate-500">Lines {station.lines.join(' · ')}</p>
+        </div>
+        <Link
+          to={`/station/${station.id}/report`}
+          className="rounded-lg border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
+        >
+          🚩 Report an issue
+        </Link>
       </div>
 
       {alerts.length > 0 && (
         <div className="space-y-2">
           {alerts.map((alert) => (
-  <AlertCard key={alert.id} alert={alert} />
-))}
+            <AlertCard key={alert.id} alert={alert} />
+          ))}
         </div>
       )}
 
@@ -98,6 +111,11 @@ function StationPage() {
             ))}
           </ul>
         )}
+      </div>
+
+      <div className="rounded-xl bg-white p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-slate-800">Recent reports</h3>
+        <ReportList reports={reports} />
       </div>
 
       <Link to="/" className="inline-block text-blue-700 underline">

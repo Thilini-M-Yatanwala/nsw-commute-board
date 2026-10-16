@@ -25,7 +25,7 @@ NSW Commute Board answers these on one simple screen.
 | 🔍 Station search | Find a station by typing part of its name (case-insensitive) | ✅ Done |
 | 🕒 Departures | Next trains with line, destination, platform and minutes away | ✅ Done |
 | ⚠️ Service alerts | Colour-coded by severity, filtered to each station's lines, plus an all-alerts page | ✅ Done |
-| 🛠️ Report an issue | Report problems like broken lifts, with server-side validation | API ✅ · UI in progress |
+| 🛠️ Report an issue | Accessible form with field-level errors from server-side validation, a reference number on success, and recent reports with their status on each station page | ✅ Done |
 | ⭐ Favourites | Save stations for quick access (stored in the browser) | Planned |
 
 ## Tech stack
@@ -65,8 +65,8 @@ Vite dev server ── proxies /api ──▶ Express API (port 4000)
 
 | Folder | Responsibility |
 |---|---|
-| `pages/` | One component per route (Home, Station, Alerts, Not found) |
-| `components/` | Reusable UI pieces (layout and nav bar, `AlertCard` shared by the Station and Alerts pages) |
+| `pages/` | One component per route (Home, Station, Report an issue, Alerts, Not found) |
+| `components/` | Reusable UI pieces (layout and nav bar, `AlertCard` shared by the Station and Alerts pages, `ReportList`) |
 | `services/` | API calls with axios. Components never call URLs directly |
 | `models/` | TypeScript types matching the API's JSON |
 | `utils/` | Small pure functions (e.g. filtering alerts by line), easy to unit test |
@@ -239,7 +239,8 @@ Validation rules: `stationId` must exist, `category` must be one of `lift`, `cle
 - [x] Loading and error states
 - [x] Station page with departures and alerts for its lines
 - [x] Alerts page with a reusable `AlertCard` component
-- [ ] Report an issue form
+- [x] Report an issue form with server validation errors shown per field
+- [x] Recent reports on the station page
 - [ ] Favourites
 - [ ] Request logger and rate limiter middleware
 - [x] Unit tests for report validation (Vitest)
