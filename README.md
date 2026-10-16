@@ -28,6 +28,20 @@ NSW Commute Board answers these on one simple screen.
 | 🛠️ Report an issue | Accessible form with field-level errors from server-side validation, a reference number on success, and recent reports with their status on each station page | ✅ Done |
 | ⭐ Favourites | Save stations for quick access (stored in the browser) | Planned |
 
+## Screenshots
+
+**Station page:** departures, alerts for the station's lines, and recent issue reports
+
+![Parramatta station page with departures, a trackwork alert and recent reports](docs/screenshots/station.png)
+
+| Station search | Service alerts |
+|---|---|
+| ![Searching for stations containing "c"](docs/screenshots/home-search.png) | ![Alerts sorted severe, warning, info](docs/screenshots/alerts.png) |
+
+| Report form: server validation errors | Report sent with a reference number |
+|---|---|
+| ![Report form showing field-level validation errors](docs/screenshots/report-validation.png) | ![Success screen with reference R-1042](docs/screenshots/report-success.png) |
+
 ## Tech stack
 
 | Area | Technology |
@@ -109,6 +123,7 @@ nsw-commute-board/
 │   └── .env.example
 ├── e2e/                       end-to-end tests (Playwright)
 ├── playwright.config.ts       starts both servers for e2e tests
+├── docs/screenshots/          README screenshots
 └── README.md
 ```
 
