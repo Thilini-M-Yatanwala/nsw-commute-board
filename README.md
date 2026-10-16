@@ -190,6 +190,8 @@ npm run test:e2e
 
 Playwright starts both servers automatically (or reuses them if already running). The tests cover the full commuter journey (search → station → report an issue → see it listed) and check that server validation errors appear under each form field. Add `--headed` to watch the browser.
 
+> 📋 See [`e2e/README.md`](e2e/README.md) for all Playwright commands: UI mode, headed, debug, reports and traces.
+
 ---
 
 ## API endpoints
