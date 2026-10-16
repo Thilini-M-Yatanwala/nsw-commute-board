@@ -6,13 +6,9 @@ import { getAlerts } from '../services/alert.service';
 import { alertsForLines } from '../utils/alerts';
 import type { Station } from '../models/station.model';
 import type { Departure } from '../models/departure.model';
-import type { Alert, AlertSeverity } from '../models/alert.model';
+import type { Alert } from '../models/alert.model';
+import AlertCard from '../components/AlertCard';
 
-const severityStyles: Record<AlertSeverity, string> = {
-  severe: 'border-red-500 bg-red-50 text-red-800',
-  warning: 'border-amber-500 bg-amber-50 text-amber-800',
-  info: 'border-blue-500 bg-blue-50 text-blue-800',
-};
 
 function StationPage() {
   const { id } = useParams<{ id: string }>();
@@ -76,13 +72,8 @@ function StationPage() {
       {alerts.length > 0 && (
         <div className="space-y-2">
           {alerts.map((alert) => (
-            <div key={alert.id} className={`border-l-4 p-4 ${severityStyles[alert.severity]}`}>
-              <p className="font-semibold">
-                {alert.line} · {alert.title}
-              </p>
-              <p className="text-sm">{alert.description}</p>
-            </div>
-          ))}
+  <AlertCard key={alert.id} alert={alert} />
+))}
         </div>
       )}
 
